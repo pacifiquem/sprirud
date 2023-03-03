@@ -1,10 +1,23 @@
 package learning.mpac.sprirud.models;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
 
+@Entity
+@Table(name = "products")
 public class Product {
-    private int id;
+    @Id
+    @SequenceGenerator(
+            name = "prodct_sequence",
+            sequenceName = "prodct_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "prodct_sequence"
+    )
+    private long id;
+
     private String name;
     private int price;
     private  int quantity;
@@ -17,8 +30,15 @@ public class Product {
         this.description = description;
     }
 
-    public int getId() {
+    public Product() {
+
+    }
+    public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -63,4 +83,5 @@ public class Product {
                 ", description='" + description + '\'' +
                 '}';
     }
+
 }
