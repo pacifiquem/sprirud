@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/api/v1/products")
+@RequestMapping(path = "/api/v2/products")
 public class ProductController {
 
     public final ProductService productService;

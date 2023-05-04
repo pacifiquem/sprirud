@@ -19,4 +19,9 @@ public class SprirudApplication {
 		return "Welcome to sprirud";
 	}
 
+	@GetMapping("*")
+	public String welcome() {
+		return "No such route on sprirud server";
+	}
+
 }
