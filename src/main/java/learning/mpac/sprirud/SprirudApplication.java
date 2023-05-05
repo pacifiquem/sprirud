@@ -20,7 +20,7 @@ public class SprirudApplication {
 	}
 
 	@GetMapping("*")
-	public String welcome() {
+	public String noRoute() {
 		return "No such route on sprirud server";
 	}
 
