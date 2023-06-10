@@ -1,6 +1,6 @@
 package learning.mpac.sprirud;
 
-import learning.mpac.sprirud.classes.Student;
+import learning.mpac.sprirud.controllers.StudentController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
