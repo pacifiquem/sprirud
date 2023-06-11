@@ -5,6 +5,7 @@ import learning.mpac.sprirud.services.StudentService;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,10 +28,9 @@ public class StudentController {
     public Optional<Student> getStudentById(@PathVariable("student_id") int student_id) {
         return this.studentService.getStudentById(student_id);
     }
-
-    @GetMapping("/get/studentByAge/{age}")
-    public List<Student> getStudentByAge(@PathVariable("age") int age) {
-        return this.studentService.getStudentByAge(age);
+    @GetMapping("/get/studentsBydob")
+    public List<Student> getStudentsByDob(@RequestBody Student student){
+        return this.studentService.getStudentByDOB(student.getDob());
     }
 
     @PostMapping("/add/student")
