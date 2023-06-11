@@ -10,6 +10,7 @@ import java.time.Period;
 
 @Data
 @Entity
+@Table(name = "students")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Student {
@@ -49,6 +50,6 @@ public class Student {
                 ", \n \tfirstName : '" + firstName + '\'' +
                 ", \n \tlastName : '" + lastName + '\'' +
                 ", \n \tlastName : '" + this.getAge() + '\'' + '\n'+
-        '}';
+                '}';
     }
 }
