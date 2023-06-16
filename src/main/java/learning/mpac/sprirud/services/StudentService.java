@@ -3,11 +3,12 @@ package learning.mpac.sprirud.services;
 import learning.mpac.sprirud.models.Student;
 import learning.mpac.sprirud.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.data.domain.Pageable;
 
 
-import javax.swing.text.html.Option;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +27,6 @@ public class StudentService {
         Optional<Student> existingStudent = studentRepo.findById(student_id);
 
         if(existingStudent.isPresent()) {
-            System.out.println(existingStudent);
             return existingStudent;
         }
 
@@ -61,6 +61,7 @@ public class StudentService {
     public Student updateStudentById(int id, Student student) {
         Optional<Student> studentInDB = studentRepo.findById(id);
 
+        //check if student who is going to be updated is in database
         if (studentInDB.isPresent()) {
             Student existingStudent = studentInDB.get();
 
@@ -84,6 +85,25 @@ public class StudentService {
         } else {
             throw new IllegalArgumentException("Student with Id " + id + " was not found");
         }
+    }
+
+    public List<Student> insertManyStudentsIntoDB(List<Student> students) {
+
+        studentRepo.saveAll(students);
+        return students;
+    }
+
+    public List<Student> getStudentOrderedByFirstName() {
+        return studentRepo.oderedByFirstName();
+    }
+
+    public Page<Student> getAllStudentsPaginated(Pageable pageable) {
+        return studentRepo.findAll(pageable);
+    }
+
+    public List<Student> getAllStudentSorted(String element) {
+        Sort sort = Sort.by(Sort.Direction.ASC, element);
+        return studentRepo.findAll(sort);
     }
 
 }

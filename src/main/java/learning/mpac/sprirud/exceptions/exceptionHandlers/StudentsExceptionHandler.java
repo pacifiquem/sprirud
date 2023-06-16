@@ -17,5 +17,4 @@ public class StudentsExceptionHandler {
     public ResponseEntity<Object> propertyValueException(PropertyValueException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
-
 }

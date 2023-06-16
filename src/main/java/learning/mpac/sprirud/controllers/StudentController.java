@@ -2,6 +2,10 @@ package learning.mpac.sprirud.controllers;
 
 import learning.mpac.sprirud.models.Student;
 import learning.mpac.sprirud.services.StudentService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -51,6 +55,28 @@ public class StudentController {
     @PutMapping("/update/studentById/{id}")
     public Student updateStudentById(@PathVariable("id") int id, @RequestBody Student student) {
         return this.studentService.updateStudentById(id, student);
+    }
+
+    @PostMapping("/insert/manyStudents")
+    public List<Student> insertManyStudentIntoDB(@RequestBody List<Student> students) {
+        return studentService.insertManyStudentsIntoDB(students);
+    }
+
+    @GetMapping("/get/student/OrderByFirstName")
+    public List<Student> getStudentOrderByFirstName() {
+        return studentService.getStudentOrderedByFirstName();
+    }
+
+    @GetMapping("/get/students/paginated/{element}/{pageNumber}/{pageSize}")
+    public Page<Student> getAllStudentWithPagination(@PathVariable int pageNumber, @PathVariable int pageSize, @PathVariable String element) {
+        // Create a Pageable object with pagination and sorting criteria
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.ASC, element));
+        return studentService.getAllStudentsPaginated(pageable);
+    }
+
+    @GetMapping("/get/students/sortedBy/{element}")
+    public List<Student> getAllStudentSorted(@PathVariable String element) {
+        return studentService.getAllStudentSorted(element);
     }
 
 }
